@@ -1,0 +1,12 @@
+body {
+    background-color: #F00 !important;
+}
+
+* {
+    background-color: #F00 !important;
+    font-size: 100px !important;
+}
+
+.auto {
+    position: absolute !important;
+}

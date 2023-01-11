@@ -1,0 +1,28 @@
+.logout {
+    min-width: 276.53px;
+}
+
+.h-4 {
+    height: 4%;
+}
+
+.w-32 {
+    width: 32%;
+}
+
+.w-33 {
+    width: 33%;
+}
+
+.w-65 {
+    width: 65%;
+}
+
+.navbar-nav > section > .nav-item {
+    width: min-content;
+    min-width: 150px;
+}
+
+.navbar-nav .nav-item {
+    font-size: 14pt;
+}

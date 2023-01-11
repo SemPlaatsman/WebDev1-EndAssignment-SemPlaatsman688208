@@ -10,3 +10,12 @@ Functionaliteiten:
 - Lijst van beschikbare boeken met reserveerknop voor user
 - Boeken inleveren, reserveren, uitlenen en bewerken door de admin
 - Users registreren
+
+[IGNORE]
+Cards:
+- Nr of users
+- Nr of books lent out
+- Nr of books late
+- Nr of books reserved
+
+https://www.googleapis.com/books/v1/volumes?q=code&printType=books&maxResults=40&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM

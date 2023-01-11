@@ -1,12 +1,28 @@
-body {
-    background-color: #F00 !important;
+#loginContainer > * {
+    display: flex;
+    justify-content: center;
 }
 
-* {
-    background-color: #F00 !important;
-    font-size: 100px !important;
+/* .form-field > label {
+    width: 20%;
 }
 
-.auto {
-    position: absolute !important;
+.form-field {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
 }
+
+.form-field > input[type=text], .form-field > input[type=email], .form-field > input[type=password] {
+    width: 35%;
+}
+
+.form-field > input[type=submit] {
+    background-color: #0078D7;
+    color: #FFF;
+    border: none;
+    min-width: 80px;
+    width: 20%;
+    height: 25px;
+    cursor: pointer;
+} */

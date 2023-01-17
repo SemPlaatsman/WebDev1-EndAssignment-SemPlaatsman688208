@@ -9,6 +9,7 @@ class Book implements JsonSerializable {
     private array $authors;
     // unknown date format provided by api so DateTime object in unreliable
     private string $publishedDate;
+    private string $description;
     private int $pageCount;
     /**
      * @var string[]
@@ -23,12 +24,13 @@ class Book implements JsonSerializable {
         return get_object_vars($this);
     }
 
-    function __construct(string $id, string $title, string $subtitle, array $authors, string $publishedDate, int $pageCount, array $categories, string $smallThumbnail, string $language, string $textSnippet) {
+    function __construct(string $id, string $title, string $subtitle, array $authors, string $publishedDate, string $description, int $pageCount, array $categories, string $smallThumbnail, string $language, string $textSnippet) {
         $this->id = $id;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->authors = $authors;
         $this->publishedDate = $publishedDate;
+        $this->description = $description;
         $this->pageCount = $pageCount;
         $this->categories = $categories;
         $this->smallThumbnail = $smallThumbnail;
@@ -84,6 +86,17 @@ class Book implements JsonSerializable {
     public function getPublishedDate() : string
     {
         return $this->publishedDate;
+    }
+
+    
+    /**
+     * Get the value of description
+     * 
+     * @return string
+     */ 
+    public function getDescription() : string
+    {
+        return $this->description;
     }
 
     /**

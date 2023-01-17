@@ -1,3 +1,3 @@
 function loadDashboard() {
-    window.location.href = "http://localhost/dashboard";
+    window.location.href = "/dashboard";
 }

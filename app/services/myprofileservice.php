@@ -7,5 +7,9 @@ class MyProfileService {
     function __construct() {
         $this->myProfileRepository = new MyProfileRepository();
     }
+
+    function getUserBooks(int $userId) : array {
+        return $this->myProfileRepository->getUserBooks($userId);
+    }
 }
 ?>

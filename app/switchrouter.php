@@ -30,7 +30,7 @@ class SwitchRouter {
 
             case ['home', true, true]:
             case ['home', true, false]:
-                require __DIR__ . '/api/controllers/homecontroller.php';
+                require __DIR__ . '/controllers/homecontroller.php';
                 $controller = new HomeController();
                 $controller->index();
                 break;
@@ -51,6 +51,13 @@ class SwitchRouter {
             case ['myprofile', true, false]:
                 require __DIR__ . '/controllers/myprofilecontroller.php';
                 $controller = new MyProfileController();
+                $controller->index();
+                break;
+
+            case ['books', true, true]:
+            case ['books', true, false]:
+                require __DIR__ . '/api/controllers/bookscontroller.php';
+                $controller = new BooksController();
                 $controller->index();
                 break;
             

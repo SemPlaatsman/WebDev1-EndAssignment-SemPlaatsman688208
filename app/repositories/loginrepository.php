@@ -6,8 +6,8 @@ class LoginRepository extends Repository {
         $query = $this->connection->prepare("SELECT id, username, hashedPassword, isAdmin FROM users WHERE username=:username");
         $query->bindParam(":username", $username);
         $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC)[0];
-        if (!empty($result) && password_verify($_POST['password'], $result['hashedPassword'])) {
+        $result = $query->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
+        if (!empty($result) && (isset($result['id']) && isset($result['username']) && isset($result['isAdmin'])) && password_verify($_POST['password'], $result['hashedPassword'])) {
             return new User($result['id'], $result['username'], $result['isAdmin']);
         }
         return null;

@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/ico" href="/img/ico/favicon-black.ico" media="(prefers-color-scheme: light)"/>
+    <link rel="icon" type="image/ico" href="/img/ico/favicon-white.ico" media="(prefers-color-scheme: dark)"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main-style.css">
@@ -32,10 +34,6 @@
                            href="/dashboard"><i class="fa-sharp fa-solid fa-gauge-high"></i> Dashboard</a>
                     </li>
                     <li class="nav-item w-auto text-center">
-                        <a class="nav-link <?= strtolower($directory) == "books" ? "text-white bg-black" : "" ?>"
-                           href="#"><i class="fa-solid fa-book"></i> Books</a>
-                    </li>
-                    <li class="nav-item w-auto text-center">
                         <a class="nav-link <?= strtolower($directory) == "users" ? "text-white bg-black" : "" ?>"
                            href="/users"><i class="fa-solid fa-user"></i> Users</a>
                     </li>
@@ -49,6 +47,10 @@
                 <?php
                     }
                 ?>
+                    <li class="nav-item w-auto text-center">
+                        <a class="nav-link <?= strtolower($directory) == "books" ? "text-white bg-black" : "" ?>"
+                           href="/books"><i class="fa-solid fa-book"></i> Books</a>
+                    </li>
             </section>
             <li class="nav-item logout">
                 <a class="nav-link pull-right" href="/logout">Log out <i class="fa-solid fa-arrow-right-from-bracket"></i></a>

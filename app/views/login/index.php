@@ -6,51 +6,18 @@
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main-style.css">
+    <link rel="stylesheet" href="css/login.css">
   </head>
   <body>
 
-    <div class="jumbotron text-center bg-dark text-light h-99">
+    <section class="jumbotron text-center bg-dark text-light h-99 p-1">
         <h1>Library System</h1>
         <p>Welcome to the Library Management System made by Sem Plaatsman</p>
-    </div>
+    </section>
 
-    <!-- <div class="container row m-auto">
-        <div class="col-md-6 text-center">
-            <div class="h-100 p-5 text-white bg-dark rounded-3">
-                <h2>Admin Login</h2>
-                <p></p>
-                <a href="admin_login.php" class="btn btn-outline-light">Admin Login</a>
-            </div>
-        </div>
-        <div class="col-md-6 text-center">
-            <div class="h-100 p-5 bg-light border rounded-3">
-                <h2>User Login</h2>
-                <p></p>
-                <a href="user_login.php" class="btn btn-outline-secondary">User Login</a>
-                <a href="user_registration.php" class="btn btn-outline-primary">User Sign Up</a>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- <div class="container">
-        <form class="form" id="loginForm" method="POST">
-            <h1 class="text-center">Login</h1>
-            <div class="form-group">
-                <label class="col-md-2" for="usernameField">Username:</label>
-                <input class="col-md-6" id="usernameField" type="text" name="username" />
-            </div>
-            <div class="form-group row">
-                <label for="passwordField">Password:</label>
-                <input id="passwordField" type="password" name="password" />
-            </div>
-            <div class="form-group row">
-                <label>&nbsp;</label>
-                <input type="submit" value="Login" name="submit" />
-            </div>
-        </form>
-    </div> -->
-    <div class="container justify-content-center" id="loginContainer">
+    <br>
+    <div class="container" id="login-container">
         <?php
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (empty($_POST['username']) || empty($_POST['password']) || !isset($_POST['username']) || !isset($_POST['password'])) {
@@ -74,19 +41,19 @@
                 }
             }
         ?>
-        <form class="col-md-4 mx-auto row" method="POST">
-            <h1 class="text-center">Login</h1>
+        <form class="col-md-4 mx-auto row" method="POST" id="login-form">
+            <h1 class="text-center text-light">Login</h1>
             <div class="form-group p-2">
-                <label class="" for="usernameField">Username:</label>
+                <label class="text-light fs-5" for="usernameField">Username:</label>
                 <input class="w-100" id="usernameField" type="text" name="username" />
             </div>
             <div class="form-group p-2">
-                <label class="" for="passwordField">Password:</label>
+                <label class="text-light fs-5" for="passwordField">Password:</label>
                 <input class="w-100" id="passwordField" type="password" name="password" />
             </div>
             <hr class="invisible">
-            <hr class="p-1">
-            <input class="btn btn-primary" type="submit" value="Send" name="submit" />
+            <hr class="custom-hr bg-black opacity-100">
+            <input class="btn btn-primary" type="submit" value="Login" name="submit" />
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

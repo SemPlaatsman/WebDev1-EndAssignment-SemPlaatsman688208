@@ -1,9 +1,9 @@
 <?php
 require_once('../models/user.php');
-class Controller {
+class APIController {
     function displayView($model = []) {        
-        $directory = substr(get_class($this), 0, -10);
-        $view = debug_backtrace()[1]['function'];
+        $directory = strtolower(substr(get_class($this), 0, -10));
+        $view = strtolower(debug_backtrace()[1]['function']);
         require __DIR__ . "/../../views/$directory/$view.php";
     }
 }

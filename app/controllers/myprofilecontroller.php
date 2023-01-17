@@ -1,6 +1,8 @@
 <?php
-require __DIR__ . '/controller.php';
-require __DIR__ . '/../services/myprofileservice.php';
+require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/../models/book.php';
+require_once __DIR__ . '/../models/bookstatus.php';
+require_once __DIR__ . '/../services/myprofileservice.php';
 
 class MyProfileController extends Controller {
     private $myProfileService;
@@ -9,8 +11,18 @@ class MyProfileController extends Controller {
         $this->myProfileService = new MyProfileService();
     }
 
+    public function getUserBooks(int $userId) : array {
+        return $this->myProfileService->getUserBooks($userId);
+    }
+
     public function index() {
-        $this->displayView();
+        if (!isset($_SESSION['user'])) {
+            header('Location: /');
+        }
+
+        $user = unserialize($_SESSION['user']);
+        $userBooks = $this->getUserBooks($user->getId());
+        $this->displayView($userBooks);
     }
 }
 ?>

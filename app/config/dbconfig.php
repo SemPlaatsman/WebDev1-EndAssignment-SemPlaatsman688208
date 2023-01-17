@@ -1,4 +1,9 @@
 <?php
+// if ($_SERVER['HTTP_HOST'] != 'localhost') {
+//     webhost
+// } else {
+//     docker
+// }
 $type = "mysql";
 $servername = "mysql";
 $username = "developer";

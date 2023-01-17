@@ -10,7 +10,14 @@ class DashboardController extends Controller {
     }
 
     public function index() {
-        $this->displayView();
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
+            if (isset($_POST['reservationId'])) {
+                $this->dashboardService->completeReservation($_POST['reservationId']);
+            }
+        }
+
+        $model = $this->dashboardService->getDashboardData();
+        $this->displayView($model);
     }
 }
 ?>

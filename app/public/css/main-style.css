@@ -26,3 +26,19 @@
 .navbar-nav .nav-item {
     font-size: 14pt;
 }
+
+.overflow-table {
+    position: relative;
+    height: 75vh;
+    overflow: auto;
+    display: block;
+}
+
+.vh-70 {
+    height: 70vh;
+}
+
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,0.5046393557422969) 0%, rgba(9,9,121,0.6194852941176471) 39%, rgba(255,0,0,0.4374124649859944) 100%);
+}

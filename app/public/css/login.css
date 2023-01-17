@@ -1,6 +1,15 @@
-#loginContainer > * {
-    display: flex;
-    justify-content: center;
+#login-container > * {
+    align-content: flex-start;
+    height: 75vh;
+}
+
+#login-form {
+    margin-top: 18vh;
+}
+
+.custom-hr {
+    padding-bottom: 2px;
+    margin-bottom: 5%;
 }
 
 /* .form-field > label {

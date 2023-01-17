@@ -1,0 +1,23 @@
+.card > .card {
+    flex-direction: row;
+}
+
+/* @media only screen and (max-width: 1369px) and (min-width: 991px) {
+    .card > .card {
+        flex-direction: column;
+    }
+} */
+
+@media only screen and (max-width: 1369px) and (min-width: 768px) {
+    .card > .card {
+        flex-direction: column;
+    }
+}
+
+.single-book-image {
+    max-width: 256px;
+}
+
+.custom-btn-disabled {
+    pointer-events: none;
+}

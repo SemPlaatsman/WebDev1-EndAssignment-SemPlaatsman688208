@@ -17,7 +17,7 @@ Functionaliteiten:
 <h3>username/password combinations:</h3>
 
 ```json
-"users": {
+"users": [
     {
         "username": "sempl",
         "password": "semphp",
@@ -28,9 +28,9 @@ Functionaliteiten:
         "password": "secret123",
         "isAdmin": false
     }
-}
+]
 ```
 
-<p>This application was submitted on CURR_DATE to Moodle.</p>
+<p>This application was submitted on ADD_LATER to Moodle.</p>
 
 <p>PS: In the bookReservations table the thumbnail and book title we're also saved so it would be a lot less heavy for the API and a bit more heavy for the database.</p>

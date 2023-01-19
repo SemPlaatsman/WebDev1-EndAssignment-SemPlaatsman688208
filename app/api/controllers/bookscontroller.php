@@ -29,7 +29,8 @@ class BooksController extends APIController {
             if (!empty($_GET)) {
                 $this->handleGET($model);
             } else {
-                $data = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=code&printType=books&maxResults=21&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM");
+                require_once __DIR__ . '/../../config/apikey.php';
+                $data = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=code&printType=books&maxResults=21&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=" . $APIKey);
                 $data = json_decode($data);
                 foreach ($data->items as $bookData) {
                     $book = $this->dataToBook($bookData, true);
@@ -57,7 +58,8 @@ class BooksController extends APIController {
         $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         // get one book by id
         if (isset($_GET['id']) && !empty($_GET['id'])) {
-            $data = file_get_contents("https://www.googleapis.com/books/v1/volumes/" . $_GET['id'] . "?maxResults=1&fields=id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet)&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM");
+            require_once __DIR__ . '/../../config/apikey.php';
+            $data = file_get_contents("https://www.googleapis.com/books/v1/volumes/" . $_GET['id'] . "?maxResults=1&fields=id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet)&key=" . $APIKey);
             $data = json_decode($data);
             $book = $this->dataToBook($data, false);
             array_push($model, $book);
@@ -65,7 +67,8 @@ class BooksController extends APIController {
         // get books by search query
         else if (isset($_GET['search']) && !empty($_GET['search'])) {
             $searchQuery = str_replace(' ', '%20', $_GET['search']);
-            $data = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=' . $searchQuery . '&printType=books&maxResults=21&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM');
+            require_once __DIR__ . '/../../config/apikey.php';
+            $data = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=' . $searchQuery . '&printType=books&maxResults=21&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=' . $APIKey);
             $data = json_decode($data);
             foreach ($data->items as $bookData) {
                 $book = $this->dataToBook($bookData, false);

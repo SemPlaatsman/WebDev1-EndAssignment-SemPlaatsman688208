@@ -7,5 +7,5 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 
-dbconfig.php
 apikey.php
+dbconfig.php

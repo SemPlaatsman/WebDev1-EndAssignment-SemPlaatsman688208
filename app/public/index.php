@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../switchrouter.php';
+require_once __DIR__ . '/../switchrouter.php';
 
 $uri = trim($_SERVER['REQUEST_URI'], '/');
 

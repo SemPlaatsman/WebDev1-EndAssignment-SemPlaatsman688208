@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../repositories/dashboardrepository.php';
+require_once __DIR__ . '/../repositories/dashboardrepository.php';
 
 class DashboardService {
     private $dashboardRepository;
@@ -20,7 +20,7 @@ class DashboardService {
         return $this->dashboardRepository->collectBook($username, $reservationId);
     }
 
-    public function returnBook(int $reservationId) : bool {
+    public function returnBook(int $reservationId) : ?DateTime {
         return $this->dashboardRepository->returnBook($reservationId);
     }
 }

@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/controller.php';
-require __DIR__ . '/../services/dashboardservice.php';
+require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/../services/dashboardservice.php';
 
 class DashboardController extends Controller {
     private $dashboardService;
@@ -23,7 +23,11 @@ class DashboardController extends Controller {
                 $model['successPOST'] = $this->dashboardService->collectBook($_POST['collectUsername'], $_POST['collectReservationId']);
             }
             else if (isset($_POST['returnReservationId']) && !empty($_POST['returnReservationId'])) {
-                $model['successPOST'] = $this->dashboardService->returnBook($_POST['returnReservationId']);
+                $result = $this->dashboardService->returnBook($_POST['returnReservationId']);
+                if (isset($result)) {
+                    $model['successPOST'] = isset($result);
+                    $model += ['returnLendingDate' => $result];
+                }
             }
         }
 

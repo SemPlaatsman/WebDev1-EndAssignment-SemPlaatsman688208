@@ -99,6 +99,10 @@ require_once __DIR__ . '/../../models/bookreservation.php';
                 <button class="btn btn-primary col-md-8 <?= (isset($model['successPOST']) && isset($_POST['returnReservationId'])) ? ($model['successPOST'] ? "is-valid" : "is-invalid") : "" ?>" form="return-form" type="submit">Return book</button>
                 <p class="invalid-feedback text-light p-1 my-0 mt-3 bg-danger rounded">Invalid reservation id!</p>
                 <p class="valid-feedback text-light p-1 my-0 mt-3 bg-success rounded">Returned reservation<?= isset($POST['returnReservationId']) ? " " . $POST['returnReservationId'] : "" ?>!</p>
+                <?php if (isset($model['successPOST']) && $model['successPOST'] && isset($model['returnLendingDate']) && $model['returnLendingDate']->diff(new DateTime())->days > 28) { ?>
+                    <p class="bg-danger text-light">Fine: €<?= sprintf("%.2f", floatval(($model['returnLendingDate']->diff(new DateTime())->days - 28) / 5)) ?></p>
+                    <button type="button" class="btn btn-primary" onclick="payFine()" id="payFineButton">Pay fine</button>
+                <?php } ?>
             </form>
         </section>
     </section>

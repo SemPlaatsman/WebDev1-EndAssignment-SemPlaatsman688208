@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/controller.php';
-require __DIR__ . '/../services/usersservice.php';
+require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/../services/usersservice.php';
 
 class UsersController extends Controller {
     private $usersService;

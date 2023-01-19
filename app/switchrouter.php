@@ -9,7 +9,7 @@ class SwitchRouter {
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
         switch([$uri, isset($_SESSION['user']), isset($_SESSION['user']) && unserialize($_SESSION['user'])->getIsAdmin()]) {
             case ['', false, false]:
-                require __DIR__ . '/controllers/logincontroller.php';
+                require_once __DIR__ . '/controllers/logincontroller.php';
                 $controller = new LoginController();
                 $controller->index();
                 break;
@@ -22,13 +22,13 @@ class SwitchRouter {
 
             case ['dashboard', true, true]:
             case ['dashboard', true, false]:
-                require __DIR__ . '/controllers/dashboardcontroller.php';
+                require_once __DIR__ . '/controllers/dashboardcontroller.php';
                 $controller = new DashboardController();
                 $controller->index();
                 break;
 
             case ['users', true, true]:
-                require __DIR__ . '/controllers/userscontroller.php';
+                require_once __DIR__ . '/controllers/userscontroller.php';
                 $controller = new UsersController();
                 $controller->index();
                 break;
@@ -41,14 +41,14 @@ class SwitchRouter {
                 break;
 
             case ['myprofile', true, false]:
-                require __DIR__ . '/controllers/myprofilecontroller.php';
+                require_once __DIR__ . '/controllers/myprofilecontroller.php';
                 $controller = new MyProfileController();
                 $controller->index();
                 break;
 
             case ['books', true, true]:
             case ['books', true, false]:
-                require __DIR__ . '/api/controllers/bookscontroller.php';
+                require_once __DIR__ . '/api/controllers/bookscontroller.php';
                 $controller = new BooksController();
                 $controller->index();
                 break;

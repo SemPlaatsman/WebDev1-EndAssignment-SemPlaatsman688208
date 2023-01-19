@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/repository.php';
+require_once __DIR__ . '/repository.php';
 
 class BooksRepository extends Repository {
     public function reserveBook(string $bookId, string $smallThumbnail, string $title, int $userId) : bool {

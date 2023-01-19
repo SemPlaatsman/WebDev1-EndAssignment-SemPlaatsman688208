@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="30">
     <link rel="icon" type="image/ico" href="/img/ico/favicon-black.ico" media="(prefers-color-scheme: light)"/>
     <link rel="icon" type="image/ico" href="/img/ico/favicon-white.ico" media="(prefers-color-scheme: dark)"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">

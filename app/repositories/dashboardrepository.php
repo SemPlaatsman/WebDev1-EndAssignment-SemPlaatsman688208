@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/repository.php';
+require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/bookreservation.php';
 
 class DashboardRepository extends Repository {
@@ -16,15 +16,23 @@ class DashboardRepository extends Repository {
         return $dashboardCards;
     }
 
-    public function getAllBookReservations() : array {
-        $query = $this->connection->prepare('SELECT id, bookId, bookThumbnail, bookTitle, userId, lendingDate, bookStatus FROM bookReservations;');
+    public function getAllBookReservations(int $reservationId = null) : array {
+        $query = $this->connection->prepare('SELECT id, bookId, bookThumbnail, bookTitle, userId, lendingDate, bookStatus FROM bookReservations' .
+                                            (isset($reservationId) ? ' WHERE id = :reservationId' : '') .
+                                            ';');
+        if (isset($reservationId)) {
+            $query->bindParam("reservationId", $reservationId);
+        }
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'BookReservation');
 
-        // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
-        function rowMapper($id, $bookId, $bookThumbnail, $bookTitle, $userId, $lendingDate, $bookStatus) {
-            return new BookReservation($id, $bookId, $bookThumbnail, $bookTitle, $userId, $lendingDate, $bookStatus);
+        if (!function_exists('rowMapper')) {
+            // rowMapper based on this stackoverflow post: https://stackoverflow.com/questions/12368035/pdo-fetch-class-pass-results-to-constructor-as-parameters
+            function rowMapper($id, $bookId, $bookThumbnail, $bookTitle, $userId, $lendingDate, $bookStatus) {
+                return new BookReservation($id, $bookId, $bookThumbnail, $bookTitle, $userId, $lendingDate, $bookStatus);
+            }
         }
+        
         $bookReservations = $query->fetchAll(PDO::FETCH_FUNC, 'rowMapper');
         return $bookReservations;
     }
@@ -54,11 +62,15 @@ class DashboardRepository extends Repository {
         return boolval($query->rowCount());
     }
 
-    public function returnBook(int $reservationId) : bool {
+    public function returnBook(int $reservationId) : ?DateTime {
+        $reservation = $this->getAllBookReservations($reservationId)[0] ?? null;
+        if (!isset($reservation)) {
+            return null;
+        }
         $query = $this->connection->prepare('DELETE FROM bookReservations WHERE id = :reservationId LIMIT 1;');
         $query->bindParam(':reservationId', $reservationId);
         $query->execute();
-        return boolval($query->rowCount());
+        return $reservation->getLendingDate();
     }
 }
 ?>

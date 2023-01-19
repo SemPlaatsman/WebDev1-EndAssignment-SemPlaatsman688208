@@ -19,23 +19,25 @@
     </section>
 
     <br>
-    <div class="container" id="login-container">
-        <form class="col-md-4 mx-auto row" method="POST" id="login-form">
+    <section class="container" id="login-container">
+        <form class="col-md-4 mx-auto row align-content-start vh-50" method="POST" id="login-form">
             <h1 class="text-center text-light">Login</h1>
-            <div class="form-group p-2">
+            <fieldset class="form-group p-2">
                 <label class="text-light fs-5" for="usernameField">Username:</label>
                 <input class="w-100" id="usernameField" type="text" name="username" value="<?= $_POST['username'] ?? "" ?>"/>
-            </div>
-            <div class="form-group p-2">
+            </fieldset>
+            <fieldset class="form-group p-2">
                 <label class="text-light fs-5" for="passwordField">Password:</label>
                 <input class="w-100" id="passwordField" type="password" name="password" />
-            </div>
+            </fieldset>
             <hr class="invisible">
             <hr class="custom-hr bg-black opacity-100">
             <input class="btn btn-primary fs-5 <?= (isset($_POST['username']) && isset($_POST['password'])) ? "is-invalid" : "" ?>" type="submit" value="Login" name="submit" />
             <p class="text-center invalid-feedback text-light p-1 my-0 mt-3 bg-danger rounded">Invalid username/password combination!</p>
         </form>
-    </div>
+    </section>
+    <script src="https://kit.fontawesome.com/815494004e.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="js/login.js"></script>
   </body>

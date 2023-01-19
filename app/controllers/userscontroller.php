@@ -12,22 +12,17 @@ class UsersController extends Controller {
     public function index() {
         $model = [];
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
+            // delete user by id
             if (!empty($_POST['id']) && isset($_POST['id'])) {
                 $this->deleteUser(intval($_POST['id']));
             }
+            // add user
             else if (!empty($_POST['username']) && isset($_POST['username']) && !empty($_POST['password']) && isset($_POST['password'])) {
                 $username = htmlspecialchars($_POST['username']);
                 $password = htmlspecialchars($_POST['password']);
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $result = $this->addUser($username, $hashedPassword, false);
                 $model += ['successPOST' => $result];
-                // if () {
-                //     $btnClass = "btn-success";
-                //     $btnText = "Successfully added member!";
-                // } else {
-                //     $btnClass = "btn-danger";
-                //     $btnText = "Could not add member!";
-                // }
             }
         }
 

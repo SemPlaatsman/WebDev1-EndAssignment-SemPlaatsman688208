@@ -8,30 +8,38 @@ class UsersService {
         $this->usersRepository = new UsersRepository();
     }
 
-    public function getAll() {
-        // retrieve users
+    /**
+     * Method to get all users
+     * Returns an array with all users
+     * 
+     * @return array
+     */
+    public function getAll() : array {
         $users = $this->usersRepository->getAll();
         return $users;
     }
 
+    /**
+     * Method to delete a user
+     * 
+     * @param int $userId
+     */
     public function deleteUser(int $id) {
         $this->usersRepository->deleteUser($id);
     }
 
+    /**
+     * Method to add a user
+     * Returns a bool to check if a user was successfully added or not
+     * 
+     * @param string $username
+     * @param string $password
+     * @param bool $isAdmin
+     * 
+     * @return bool
+     */
     public function addUser(string $username, string $password, bool $isAdmin) : bool {
         return $this->usersRepository->addUser($username, $password, $isAdmin);
     }
-
-    // public function getAllAdmins() {
-    //     // retrieve admins
-    //     $admins = $this->usersRepository->getAllAdmins();
-    //     return $admins;
-    // }
-
-    // public function getAllMembers() {
-    //     // retrieve members
-    //     $members = $this->usersRepository->getAllMembers();
-    //     return $members;
-    // }
 }
 ?>

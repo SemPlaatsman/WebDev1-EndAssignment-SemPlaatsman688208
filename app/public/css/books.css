@@ -2,12 +2,6 @@
     flex-direction: row;
 }
 
-/* @media only screen and (max-width: 1369px) and (min-width: 991px) {
-    .card > .card {
-        flex-direction: column;
-    }
-} */
-
 @media only screen and (max-width: 1369px) and (min-width: 768px) {
     .card > .card {
         flex-direction: column;

@@ -8,6 +8,14 @@ class MyProfileService {
         $this->myProfileRepository = new MyProfileRepository();
     }
 
+    /**
+     * Method to get the books of a user
+     * Returns an array with user books
+     * 
+     * @param int $userId
+     * 
+     * @return array
+     */
     function getUserBooks(int $userId) : array {
         return $this->myProfileRepository->getUserBooks($userId);
     }

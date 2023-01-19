@@ -16,9 +16,9 @@ class MyProfileController extends Controller {
     }
 
     public function index() {
-        if (!isset($_SESSION['user'])) {
-            header('Location: /');
-        }
+        // if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
+        //     header('Location: /');
+        // }
 
         $user = unserialize($_SESSION['user']);
         $userBooks = $this->getUserBooks($user->getId());

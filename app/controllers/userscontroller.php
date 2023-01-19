@@ -10,9 +10,29 @@ class UsersController extends Controller {
     }
 
     public function index() {
-        $users = $this->getAll();
+        $model = [];
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST)) {
+            if (!empty($_POST['id']) && isset($_POST['id'])) {
+                $this->deleteUser(intval($_POST['id']));
+            }
+            else if (!empty($_POST['username']) && isset($_POST['username']) && !empty($_POST['password']) && isset($_POST['password'])) {
+                $username = htmlspecialchars($_POST['username']);
+                $password = htmlspecialchars($_POST['password']);
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $result = $this->addUser($username, $hashedPassword, false);
+                $model += ['successPOST' => $result];
+                // if () {
+                //     $btnClass = "btn-success";
+                //     $btnText = "Successfully added member!";
+                // } else {
+                //     $btnClass = "btn-danger";
+                //     $btnText = "Could not add member!";
+                // }
+            }
+        }
 
-        $this->displayView($users);
+        $model += ['users' => $this->getAll()];
+        $this->displayView($model);
     }
 
     /**

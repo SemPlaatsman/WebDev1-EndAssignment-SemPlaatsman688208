@@ -8,12 +8,20 @@ class DashboardService {
         $this->dashboardRepository = new DashboardRepository();
     }
 
-    public function getDashboardData() : array {
-        return $this->dashboardRepository->getDashboardData();
+    public function getDashboardData(int $userId = null) : array {
+        return $this->dashboardRepository->getDashboardData($userId);
     }
 
     public function completeReservation(int $reservationId) : bool {
         return $this->dashboardRepository->completeReservation($reservationId);
+    }
+
+    public function collectBook(string $username, int $reservationId) : bool {
+        return $this->dashboardRepository->collectBook($username, $reservationId);
+    }
+
+    public function returnBook(int $reservationId) : bool {
+        return $this->dashboardRepository->returnBook($reservationId);
     }
 }
 ?>

@@ -3,9 +3,14 @@ require __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/bookreservation.php';
 
 class DashboardRepository extends Repository {
-    public function getDashboardCards() : array {
+    public function getDashboardCards(int $userId = null) : array {
         $query = $this->connection->prepare('SELECT SUM(bookStatus = 0) as "nrToBeReserved", SUM(bookStatus = 1) as "nrReserved", SUM(bookStatus = 2) as "nrLendOut", ' .
-                                            'SUM(bookStatus = 2 && lendingDate <= DATE_ADD(NOW(), INTERVAL -1 MONTH)) AS "nrLate" FROM bookReservations;');
+                                            'SUM(bookStatus = 2 && lendingDate <= DATE_ADD(NOW(), INTERVAL -1 MONTH)) AS "nrLate" FROM bookReservations' .
+                                            (isset($userId) ? ' WHERE userId = :userId' : '') .
+                                            ';');
+        if (isset($userId)) {
+            $query->bindParam(":userId", $userId);
+        }
         $query->execute();
         $dashboardCards = $query->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
         return $dashboardCards;
@@ -24,16 +29,34 @@ class DashboardRepository extends Repository {
         return $bookReservations;
     }
 
-    public function getDashboardData() : array {
-        $dashboardData = $this->getDashboardCards();
-        $bookReservations =  $this->getAllBookReservations();
-        $dashboardData += ['bookReservations' => $bookReservations];
+    public function getDashboardData(int $userId = null) : array {
+        $dashboardData = $this->getDashboardCards($userId);
+        if (!isset($userId)) {
+            $bookReservations =  $this->getAllBookReservations();
+            $dashboardData += ['bookReservations' => $bookReservations];
+        }
         return $dashboardData;
     }
 
     public function completeReservation(int $reservationId) : bool {
-        $query = $this->connection->prepare('UPDATE bookReservations SET bookStatus = 1 WHERE id = :reservationId LIMIT 1');
+        $query = $this->connection->prepare('UPDATE bookReservations SET bookStatus = 1 WHERE id = :reservationId LIMIT 1;');
         $query->bindParam(":reservationId", $reservationId);
+        $query->execute();
+        return boolval($query->rowCount());
+    }
+
+    public function collectBook(string $username, int $reservationId) : bool {
+        $query = $this->connection->prepare('UPDATE bookReservations SET bookStatus = 2 WHERE id = :reservationId && ' . 
+                                            'userId = (SELECT users.id FROM users WHERE users.username = :username) LIMIT 1;');
+        $query->bindParam(':reservationId', $reservationId);
+        $query->bindParam(':username', $username);
+        $query->execute();
+        return boolval($query->rowCount());
+    }
+
+    public function returnBook(int $reservationId) : bool {
+        $query = $this->connection->prepare('DELETE FROM bookReservations WHERE id = :reservationId LIMIT 1;');
+        $query->bindParam(':reservationId', $reservationId);
         $query->execute();
         return boolval($query->rowCount());
     }

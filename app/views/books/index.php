@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . '/../header.php';
 require_once __DIR__ . '/../../models/book.php';
+$userIsAdmin = unserialize($_SESSION['user'])->getIsAdmin();
 ?>
 
 <section class="container row d-flex justify-content-center pt-2 mx-auto col-md-10 pb-4">
@@ -31,17 +32,18 @@ require_once __DIR__ . '/../../models/book.php';
                                 <p class="card-text"><?= $book->getTextSnippet(); ?></p>
                             </section>
                         </section>
-                        <section class="card-footer d-flex justify-content-between">
-                            <a href="/books?id=<?= $book->getId(); ?>" class="btn btn-secondary">Read further...</a>
+                        <section class="card-footer d-flex w-100">
+                            <a href="/books?id=<?= $book->getId(); ?>" class="btn btn-secondary me-auto">Read further...</a>
                             <? if (isset($_POST['bookReservationId']) && $_POST['bookReservationId'] == $book->getId()) { ?>
                                 <button class="btn btn-success custom-btn-disabled">Successfully reserved!</button>
-                            <? } else { ?>
-                                <form class="" method="POST" id="form-<?= $book->getId(); ?>">
+                            <? } else if (!$userIsAdmin) { ?>
+                                <form method="POST" id="form-<?= $book->getId(); ?>">
                                     <input type="hidden" name="bookReservationThumbnail" value="<?= $book->getSmallThumbnail(); ?>">
                                     <input type="hidden" name="bookReservationTitle" value="<?= $book->getTitle(); ?>">
                                     <button class="btn btn-primary" type="submit" form="form-<?= $book->getId(); ?>" value="<?= $book->getId(); ?>" name="bookReservationId">Reserve now!</button>
                                 </form>
                             <? } ?>
+                            <button id="download-<?= $book->getId() ?>" onclick="downloadFile('<?= $book->getId() ?>')" class="btn btn-dark ms-1"><i class="fa-solid fa-download"></i></button>
                         </section>
                     </article>
                 </section>
@@ -83,13 +85,14 @@ require_once __DIR__ . '/../../models/book.php';
             
             <? if (isset($_POST['bookReservationId']) && $_POST['bookReservationId'] == $book->getId()) { ?>
                 <button class="btn btn-success custom-btn-disabled fs-5">Successfully reserved!</button>
-            <? } else { ?>
-                <form class="" method="POST" id="reserve-form">
+            <? } else if (!$userIsAdmin) { ?>
+                <form method="POST" id="reserve-form">
                     <input type="hidden" name="bookReservationThumbnail" value="<?= $book->getSmallThumbnail(); ?>">
                     <input type="hidden" name="bookReservationTitle" value="<?= $book->getTitle(); ?>">
                     <button class="btn btn-primary fs-5" type="submit" form="reserve-form" value="<?= $book->getId(); ?>" name="bookReservationId">Reserve now!</button>
                 </form>
             <? } ?>
+            <button id="download-<?= $book->getId() ?>" onclick="downloadFile('<?= $book->getId() ?>')" class="btn btn-dark mt-2"><i class="fa-solid fa-download"></i> Download JSON</button>
         </section>
     <?php } ?>
 </section>

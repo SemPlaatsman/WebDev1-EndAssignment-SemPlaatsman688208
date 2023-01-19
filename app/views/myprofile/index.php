@@ -9,9 +9,10 @@ $user = unserialize($_SESSION['user']);
     <table class="table table-hover table-responsive w-100">
         <thead class="bg-primary text-white">
             <tr>
+                <th class="col-md-1" scope="col">ID</th>
                 <th class="col-md-1" scope="col">Thumbnail</th>
                 <th class="col-md-3" scope="col">Title</th>
-                <th class="col-md-4" scope="col">Lending date <small class="fs-6 d-none d-sm-none d-md-inline">(day-month-year)</small></th>
+                <th class="col-md-3" scope="col">Lending date <small class="fs-6 d-none d-sm-none d-md-inline">(day-month-year)</small></th>
                 <th class="col-md-4" scope="col">Status</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@ $user = unserialize($_SESSION['user']);
                 foreach($model as $bookReservation) {
             ?>
                 <tr>
+                    <td><?= $bookReservation->getId(); ?></td>
                     <td class="" scope="row">
                         <a href="/books?id=<?= $bookReservation->getBookId(); ?>">
                             <img class="hover-img" src="<?= $bookReservation->getBookThumbnail(); ?>" alt="Book cover" width="96" height="125">

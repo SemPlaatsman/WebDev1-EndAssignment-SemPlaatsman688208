@@ -18,33 +18,33 @@ class UsersRepository extends Repository {
         }
     }
 
-    function getAllAdmins() {
-        try {
-            $stmt = $this->connection->prepare("SELECT id, username, isAdmin FROM users WHERE isAdmin=true");
-            $stmt->execute();
+    // function getAllAdmins() {
+    //     try {
+    //         $stmt = $this->connection->prepare("SELECT id, username, isAdmin FROM users WHERE isAdmin=true");
+    //         $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
-            $admins = $stmt->fetchAll();
+    //         $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+    //         $admins = $stmt->fetchAll();
 
-            return $admins;
-        } catch (PDOException $e) {
-            echo $e;
-        }
-    }
+    //         return $admins;
+    //     } catch (PDOException $e) {
+    //         echo $e;
+    //     }
+    // }
 
-    function getAllMembers() {
-        try {
-            $stmt = $this->connection->prepare("SELECT id, username, isAdmin FROM users WHERE isAdmin=false");
-            $stmt->execute();
+    // function getAllMembers() {
+    //     try {
+    //         $stmt = $this->connection->prepare("SELECT id, username, isAdmin FROM users WHERE isAdmin=false");
+    //         $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
-            $members = $stmt->fetchAll();
+    //         $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+    //         $members = $stmt->fetchAll();
 
-            return $members;
-        } catch (PDOException $e) {
-            echo $e;
-        }
-    }
+    //         return $members;
+    //     } catch (PDOException $e) {
+    //         echo $e;
+    //     }
+    // }
 
     function deleteUser(int $id) {
         try {
@@ -68,9 +68,7 @@ class UsersRepository extends Repository {
             
             return boolval($stmt->rowCount());
 
-        } catch (PDOException $e) {
-            echo $e;
-        }
+        } catch (PDOException $e) { }
         return false;
     }
 }

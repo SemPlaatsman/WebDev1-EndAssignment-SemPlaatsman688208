@@ -1,5 +1,4 @@
 <?php
-require_once('../models/user.php');
 class APIController {
     function displayView($model = []) {        
         $directory = strtolower(substr(get_class($this), 0, -10));

@@ -15,23 +15,15 @@ class SwitchRouter {
                 break;
 
             case ['', true, true]:
+            case ['', true, false]:
                 header("Location: /dashboard");
                 break;
 
+
             case ['dashboard', true, true]:
+            case ['dashboard', true, false]:
                 require __DIR__ . '/controllers/dashboardcontroller.php';
                 $controller = new DashboardController();
-                $controller->index();
-                break;
-
-            case ['', true, false]:
-                header("Location: /home");
-                break;
-
-            case ['home', true, true]:
-            case ['home', true, false]:
-                require __DIR__ . '/controllers/homecontroller.php';
-                $controller = new HomeController();
                 $controller->index();
                 break;
 

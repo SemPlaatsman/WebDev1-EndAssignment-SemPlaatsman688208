@@ -27,7 +27,7 @@ class BooksController extends APIController {
             if (!empty($_GET)) {
                 $this->handleGET($model);
             } else {
-                $data = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=code&printType=books&maxResults=40&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM");
+                $data = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=code&printType=books&maxResults=21&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM");
                 $data = json_decode($data);
                 foreach ($data->items as $bookData) {
                     $book = $this->dataToBook($bookData, true);
@@ -52,14 +52,14 @@ class BooksController extends APIController {
      */
     private function handleGET(&$model) {
         $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if (isset($_GET['id'])) {
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
             $data = file_get_contents("https://www.googleapis.com/books/v1/volumes/" . $_GET['id'] . "?maxResults=1&fields=id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet)&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM");
             $data = json_decode($data);
             $book = $this->dataToBook($data, false);
             array_push($model, $book);
-        } else if (isset($_GET['search'])) {
+        } else if (isset($_GET['search']) && !empty($_GET['search'])) {
             $searchQuery = str_replace(' ', '%20', $_GET['search']);
-            $data = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=' . $searchQuery . '&printType=books&maxResults=40&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM');
+            $data = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=' . $searchQuery . '&printType=books&maxResults=21&fields=items(id,volumeInfo(title,subtitle,authors,publishedDate,description,pageCount,categories,imageLinks(smallThumbnail),language),searchInfo(textSnippet))&key=AIzaSyCS3vUD0Yc_H5iHextoznZKfLsrzvbeiuM');
             $data = json_decode($data);
             foreach ($data->items as $bookData) {
                 $book = $this->dataToBook($bookData, false);
@@ -77,7 +77,8 @@ class BooksController extends APIController {
     private function handlePOST() {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         (session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED) ? session_start() : null;
-        if (isset($_POST['bookReservationId']) && isset($_POST['bookReservationThumbnail']) && isset($_POST['bookReservationTitle']) && isset($_SESSION['user'])) {
+        if (isset($_POST['bookReservationId']) && isset($_POST['bookReservationThumbnail']) && isset($_POST['bookReservationTitle']) && isset($_SESSION['user'])
+        && !empty($_POST['bookReservationId']) && !empty($_POST['bookReservationThumbnail']) && !empty($_POST['bookReservationTitle']) && !empty($_SESSION['user'])) {
             $_POST['bookReservationThumbnail'] = htmlspecialchars_decode($_POST['bookReservationThumbnail']);
             $this->booksService->reserveBook($_POST['bookReservationId'], $_POST['bookReservationThumbnail'], $_POST['bookReservationTitle'], unserialize($_SESSION['user'])->getId());
         }
@@ -104,17 +105,6 @@ class BooksController extends APIController {
             return null;
         }
 
-        // $book = new Book($bookData->id,
-        //     property_exists($volumeInfo, 'title') ? $volumeInfo->title : "Unknown title",
-        //     property_exists($volumeInfo, 'subtitle') ? $volumeInfo->subtitle : "",
-        //     property_exists($volumeInfo, 'authors') ? $volumeInfo->authors : ["Unkown authors"],
-        //     property_exists($volumeInfo, 'publishedDate') ? $volumeInfo->publishedDate : "Unknown date",
-        //     property_exists($volumeInfo, 'description') ? strip_tags($volumeInfo->description) : "No description",
-        //     property_exists($volumeInfo, 'pageCount') ? $volumeInfo->pageCount : 0,
-        //     property_exists($volumeInfo, 'categories') ? $volumeInfo->categories : ["Unknown category"],
-        //     property_exists($imageLinks, 'smallThumbnail') ? $imageLinks->smallThumbnail : "/img/png/coverunavailable.png",
-        //     property_exists($volumeInfo, 'language') ? strtoupper($volumeInfo->language) : "Language unknown",
-        //     $stripTags ? strip_tags($textSnippet) : $textSnippet);
         $book = new Book($bookData->id,
             $volumeInfo->title ?? "Unknown title",
             $volumeInfo->subtitle ?? "",

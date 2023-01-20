@@ -33,7 +33,7 @@ $user = unserialize($_SESSION['user']);
                         </a>
                     </td>
                     <td class=""><?= date_format($bookReservation->getLendingDate(), 'd-m-Y'); ?></td>
-                    <td class=""><?= $bookReservation->getBookStatus()->toString(); ?></td>
+                    <td class=""><?= $bookReservation->printBookStatus(); ?></td>
                 </tr>
             <?php
                 }

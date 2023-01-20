@@ -34,15 +34,15 @@ $userIsAdmin = unserialize($_SESSION['user'])->getIsAdmin();
                         </section>
                         <section class="card-footer d-flex w-100">
                             <a href="/books?id=<?= $book->getId(); ?>" class="btn btn-secondary me-auto">Read further...</a>
-                            <? if (isset($_POST['bookReservationId']) && $_POST['bookReservationId'] == $book->getId()) { ?>
+                            <?php if (isset($_POST['bookReservationId']) && $_POST['bookReservationId'] == $book->getId()) { ?>
                                 <button class="btn btn-success custom-btn-disabled">Successfully reserved!</button>
-                            <? } else if (!$userIsAdmin) { ?>
+                            <?php } else if (!$userIsAdmin) { ?>
                                 <form method="POST" id="form-<?= $book->getId(); ?>">
                                     <input type="hidden" name="bookReservationThumbnail" value="<?= $book->getSmallThumbnail(); ?>">
                                     <input type="hidden" name="bookReservationTitle" value="<?= $book->getTitle(); ?>">
                                     <button class="btn btn-primary" type="submit" form="form-<?= $book->getId(); ?>" value="<?= $book->getId(); ?>" name="bookReservationId">Reserve now!</button>
                                 </form>
-                            <? } ?>
+                            <?php } ?>
                             <button id="download-<?= $book->getId() ?>" onclick="downloadFile('<?= $book->getId() ?>')" class="btn btn-dark ms-1"><i class="fa-solid fa-download"></i></button>
                         </section>
                     </article>
@@ -83,15 +83,15 @@ $userIsAdmin = unserialize($_SESSION['user'])->getIsAdmin();
                 <dd class="text-sm-center text-md-start col-md-6 fs-5"><?= $book->getLanguage(); ?></dd>
             </dl>
             
-            <? if (isset($_POST['bookReservationId']) && $_POST['bookReservationId'] == $book->getId()) { ?>
+            <?php if (isset($_POST['bookReservationId']) && $_POST['bookReservationId'] == $book->getId()) { ?>
                 <button class="btn btn-success custom-btn-disabled fs-5">Successfully reserved!</button>
-            <? } else if (!$userIsAdmin) { ?>
+            <?php } else if (!$userIsAdmin) { ?>
                 <form method="POST" id="reserve-form">
                     <input type="hidden" name="bookReservationThumbnail" value="<?= $book->getSmallThumbnail(); ?>">
                     <input type="hidden" name="bookReservationTitle" value="<?= $book->getTitle(); ?>">
                     <button class="btn btn-primary fs-5" type="submit" form="reserve-form" value="<?= $book->getId(); ?>" name="bookReservationId">Reserve now!</button>
                 </form>
-            <? } ?>
+            <?php } ?>
             <button id="download-<?= $book->getId() ?>" onclick="downloadFile('<?= $book->getId() ?>')" class="btn btn-dark mt-2"><i class="fa-solid fa-download"></i> Download JSON</button>
         </section>
     <?php } ?>

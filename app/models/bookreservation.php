@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/bookstatus.php';
-
 class BookReservation {
     private int $id;
     private string $bookId;
@@ -8,7 +6,8 @@ class BookReservation {
     private string $bookTitle;
     private int $userId;
     private DateTime $lendingDate;
-    private BookStatus $bookStatus;
+    // used int because enums are part of PHP 8.1 and 000webhost doesn't support higher than 8.0
+    private int $bookStatus;
 
     function __construct(int $id, string $bookId, string $bookThumbnail, string $bookTitle, int $userId, string $lendingDate, int $bookStatus) {
         $this->id = $id;
@@ -17,7 +16,7 @@ class BookReservation {
         $this->bookTitle = $bookTitle;
         $this->userId = $userId;
         $this->lendingDate = DateTime::createFromFormat('Y-m-d', $lendingDate);
-        $this->bookStatus = BookStatus::intToEnum($bookStatus);
+        $this->bookStatus = $bookStatus;
     }
 
     /**
@@ -74,6 +73,22 @@ class BookReservation {
     public function getBookStatus()
     {
         return $this->bookStatus;
+    }
+
+    /**
+     * Method for printing the book status since enums aren't supported
+     */
+    public function printBookStatus() {
+        switch ($this->bookStatus) {
+            case 0:
+                return 'To be reserved, we\'re working hard to find it! <i class="fa-solid fa-magnifying-glass d-none d-sm-none d-md-inline"></i>';
+            case 1:
+                return 'Reserved and ready to be picked up! <i class="fa-solid fa-book d-none d-sm-none d-md-inline"></i>';
+            case 2:
+                return 'Lend out, enjoy your book! <i class="fa-regular fa-face-smile d-none d-sm-none d-md-inline"></i>';
+            default:
+                return '';
+        }
     }
 }
 

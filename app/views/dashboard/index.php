@@ -47,7 +47,7 @@ require_once __DIR__ . '/../../models/bookreservation.php';
                 </thead>
                 <tbody class="bg-light overflow-auto">
                     <?php
-                        foreach ($model['bookReservations'] as $bookReservation) if ($bookReservation->getBookStatus() == BookStatus::TO_BE_RESERVED) {
+                        foreach ($model['bookReservations'] as $bookReservation) if ($bookReservation->getBookStatus() == 0 /* TO_BE_RESERVED */) {
                     ?>
                         <tr>
                             <td class="" scope="row">

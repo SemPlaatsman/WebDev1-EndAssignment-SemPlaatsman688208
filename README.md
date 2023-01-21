@@ -1,5 +1,4 @@
-# Web Development 1 End Assignment
-## By: Sem Plaatsman (688208 - INF2A)
+# Web Development 1 End Assignment<br>## By: Sem Plaatsman (688208 - INF2A)
 
 ### NOTE: Currently (20-1-2023), Google might warn you for phishing you when visiting the users page. I've filed a report for an incorrect phishing warning to Google but it might take some time to review my report. You can check out the site anyway by clicking on the details of the warning. If you have any questions or remarks about this warning, please email me at <688208@student.inholland.nl></h3>
 

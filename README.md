@@ -1,12 +1,10 @@
-# WebDev1-EndAssignment-SemPlaatsman688208
- 
-<h1>Web Development 1 End Assignment<br>By: Sem Plaatsman (688208 - INF2A)</h1>
+# Web Development 1 End Assignment<br>By: Sem Plaatsman (688208 - INF2A)
 
 ### NOTE: Currently (20-1-2023), Google might warn you for phishing you when visiting the users page. I've filed a report for an incorrect phishing warning to Google but it might take some time to review my report. You can check out the site anyway by clicking on the details of the warning. If you have any questions or remarks about this warning, please email me at <688208@student.inholland.nl></h3>
 
-[Click to check out my website!](https://unobstructed-dents.000webhostapp.com/)
+## [Click to check out my website!](https://unobstructed-dents.000webhostapp.com/)
 
-<h3>username/password combinations:</h3>
+### username/password combinations:
 
 ```json
 "users": [
@@ -23,10 +21,10 @@
 ]
 ```
 
-<h3>SQL database creation script is in the sql folder</h3>
+### SQL database creation script is in the sql folder
 
-<h3>Proposal:</h3>
-<p>Web Development 1 Library Management System
+### Proposal:
+Web Development 1 Library Management System
 Algemene omschrijving:
 Een Library Content Management System waarin bibliothecarissen boeken kunnen laten reserveren, uitlenen, inleveren en bewerken en een dashboard kunnen zien om een algemeen overzicht van het systeem te krijgen.
 Users kunnen een lijst zien van beschikbare boeken en een boek laten reserveren.
@@ -37,8 +35,8 @@ Functionaliteiten:
 - Dashboard met o.a. aantal beschikbare en niet beschikbare boeken, aantal gereserveerde en uitgeleende boeken, et cetera voor admin
 - Lijst van beschikbare boeken met reserveerknop voor user
 - Boeken inleveren, reserveren, uitlenen en bewerken door de admin
-- Users registrere</p>
+- Users registreren
 
-<p>This application was submitted on ADD_LATER to Moodle.</p>
+This application was submitted on ADD_LATER to Moodle.
 
-<p>PS: In the bookReservations table the thumbnail and book title we're also saved so it would be a lot less heavy for the API and a bit more heavy for the database.</p>
+PS: In the bookReservations table the thumbnail and book title we're also saved so it would be a lot less heavy for the API and a bit more heavy for the database.

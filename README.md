@@ -37,6 +37,6 @@ Functionaliteiten:
 - Boeken inleveren, reserveren, uitlenen en bewerken door de admin
 - Users registreren
 
-This application was submitted on ADD_LATER to Moodle.
+This application was submitted on UNKNOWN to Moodle.
 
 PS: In the bookReservations table the thumbnail and book title we're also saved so it would be a lot less heavy for the API and a bit more heavy for the database.
